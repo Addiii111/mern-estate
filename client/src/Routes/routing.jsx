@@ -4,10 +4,12 @@ import About from '../pages/About'
 import SignIn from '../pages/Signin'
 import SignOut from '../pages/SignOut'
 import Profile from '../pages/Profile'
+import Header from '../components/Header'
 
 export default function routing() {
   return (
     <>
+    <Header/>
       <Routes>
         <Route path = '/' element={<Home/>}></Route>
         <Route path = '/About' element={<About/>}></Route>
