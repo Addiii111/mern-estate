@@ -13,8 +13,8 @@ export default function routing() {
       <Routes>
         <Route path='/' element={<Home />}></Route>
         <Route path='/About' element={<About />}></Route>
-        <Route path='/sign-in' element={<SignIn />}></Route>
-        <Route path='/sign-up' element={<SignUp />}></Route>
+        <Route path='/signin' element={<SignIn />}></Route>
+        <Route path='/signup' element={<SignUp />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
       </Routes>
     </>
