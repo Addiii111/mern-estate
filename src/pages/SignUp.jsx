@@ -1,9 +1,13 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 export default function SignUp() {
   const [formData, setFormData] = useState({})
+  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
+
   const handelChange = (e) => {
     setFormData({
       ...formData,
@@ -15,6 +19,7 @@ export default function SignUp() {
 
   const handelSubmit = (e) => {
     e.preventDefault()
+    setLoading(true)
 
     const config = {
       headers: {
@@ -24,11 +29,18 @@ export default function SignUp() {
     }
 
     axios
-      .post('http://localhost:3001/signup', formData, config)
+      .post('api/signup', formData, config)
       .then((res) => {
+        setLoading(false)
+        setError(null)
+        navigate('/signin')
         console.log(res)
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        setLoading(false)
+        setError(err.response.data.error)
+        console.log(err.response.data.error)
+      })
   }
 
   return (
@@ -57,7 +69,7 @@ export default function SignUp() {
           onChange={handelChange}
         />
         <button className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>
-          Sign Up
+          {loading ? 'Loading...' : 'Sign Up'}
         </button>
       </form>
       <div className='flex gap-2 mt-5'>
@@ -66,6 +78,7 @@ export default function SignUp() {
           <span className='text-blue-700'>Sign in</span>
         </Link>
       </div>
+      {error && <p className='text-red-500 mt-5'>{error}</p>}
     </div>
   )
 }
