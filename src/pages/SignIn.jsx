@@ -1,12 +1,18 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from '../redux/user/userSlice'
 
 export default function SignIn() {
   const [formData, setFormData] = useState({})
-  const [error, setError] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const { loading, error } = useSelector((state) => state.user)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handelChange = (e) => {
     setFormData({
@@ -19,7 +25,7 @@ export default function SignIn() {
 
   const handelSubmit = (e) => {
     e.preventDefault()
-    setLoading(true)
+    dispatch(signInStart())
 
     const config = {
       headers: {
@@ -31,14 +37,12 @@ export default function SignIn() {
     axios
       .post('api/signin', formData, config)
       .then((res) => {
-        setLoading(false)
-        setError(null)
+        dispatch(signInSuccess(res))
         navigate('/')
         console.log(res)
       })
       .catch((err) => {
-        setLoading(false)
-        setError(err.response.data.error)
+        dispatch(signInFailure(err.response.data.error))
         console.log(err.response.data.error)
       })
   }
