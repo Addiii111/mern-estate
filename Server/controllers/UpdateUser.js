@@ -10,7 +10,7 @@ const updateUser = async (req, res) => {
         if (req.body.password) {
             req.body.password = bcrypt.hashSync(req.body.password, 10)
         }
-        const updatedUser = await User.findByIdAndUpdate(req.user.id, {
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, {
             $set: {
                 username: req.body.username,
                 email: req.body.email,
@@ -21,11 +21,7 @@ const updateUser = async (req, res) => {
 
         const { password, ...rest } = updatedUser._doc
 
-        res.status(200).json({
-            success: true,
-            message: 'User updated successfully',
-            user: rest
-        })
+        res.status(200).json(rest)
 
     } catch (error) {
         res.status(401).json({ message: error.message })

@@ -28,10 +28,10 @@ const OAuth = async (req, res) => {
 
             res.cookie('access_token', token, { httpOnly: true }).status(200).json(rest)
         } else {
-            // if user already exists so we create tken and store into cookie
+            // if user already exists so we create token and store into cookie
             const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY)
             const { password: pass, ...rest } = user._doc;
-
+            
             res.cookie('access_token', token, { httpOnly: true }).status(200).json(rest)
         }
     } catch (error) {

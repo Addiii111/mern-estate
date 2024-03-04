@@ -22,9 +22,9 @@ export default function SignIn() {
     })
   }
 
-  console.log(formData)
+  // console.log(formData)
 
-  const handelSubmit = (e) => {
+  const handelSubmit = async (e) => {
     e.preventDefault()
     dispatch(signInStart())
 
@@ -35,16 +35,16 @@ export default function SignIn() {
       withCredentials: true,
     }
 
-    axios
+    await axios
       .post('api/signin', formData, config)
       .then((res) => {
         dispatch(signInSuccess(res))
         navigate('/')
-        console.log(res)
+        // console.log(res)
       })
       .catch((err) => {
         dispatch(signInFailure(err.response.data.error))
-        console.log(err.response.data.error)
+        // console.log(err.response.data.error)
       })
   }
 

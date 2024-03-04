@@ -15,6 +15,7 @@ export default function OAuth() {
       const auth = getAuth(app)
 
       const result = await signInWithPopup(auth, provider)
+      // console.log(result);
       const data = {
         name: result.user.displayName,
         email: result.user.email,
@@ -28,7 +29,7 @@ export default function OAuth() {
         withCredentials: true,
       }
       const res = await axios.post('/api/google', data, config)
-      //   const resData = await res.json()
+        // const resData = await res.json()
       console.log(res)
       dispatch(signInSuccess(res))
       navigate('/')
