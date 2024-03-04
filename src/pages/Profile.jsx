@@ -7,7 +7,7 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage'
 import { app } from '../firebase'
-import { updateUserStart , updateUserSuccess,updateUserFailure } from '../redux/user/userSlice'
+import { updateUserStart , updateUserSuccess,updateUserFailure, deleteUserFailure, deleteUserStart, deleteUserSuccess } from '../redux/user/userSlice'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 
@@ -78,6 +78,21 @@ export default function Profile() {
       // console.log(error.response.data.message);
     }
   }
+
+  const handelDeleteUser = async () =>{
+
+    try {
+      dispatch(deleteUserStart())
+      await axios
+      .delete(`api/deleteUser/${currentUser.data._id}`)
+      .then((res) => {
+        dispatch(deleteUserSuccess(res))
+        // console.log(res)
+      })
+    } catch (error) {
+      dispatch(deleteUserFailure(error.response.data.message))
+    }
+  }
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>Profile </h1>
@@ -134,7 +149,7 @@ export default function Profile() {
         </button>
       </form>
       <div className='flex justify-between mt-5'>
-        <span className='text-red-700 cursor-pointer'>Delete account</span>
+        <span onClick={handelDeleteUser} className='text-red-700 cursor-pointer'>Delete account</span>
         <span className='text-red-700 cursor-pointer'>Sign out</span>
       </div>
       <p className='text-red-700 mt-5'>{error ? error : ''}</p>
