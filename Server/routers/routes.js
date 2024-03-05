@@ -7,6 +7,7 @@ const updateUser = require('../controllers/UpdateUser.js');
 const auth = require('../middlewares/auth.js');
 const deleteUser = require('../controllers/deleteUser.js');
 const signOut = require('../controllers/signOut.js');
+const createList = require('../controllers/createList.js');
 
 const router = new express.Router();
 
@@ -15,8 +16,13 @@ router.get('/test', test)
 router.post('/api/signup', signup)
 router.post('/api/signin', signin)
 router.post('/api/google', OAuth)
+router.get('/api/signOut', signOut)
+
+
 router.post('/api/updateUser/:id', auth, updateUser)
 router.delete('/api/deleteUser/:id', auth, deleteUser)
-router.get('/api/signOut', signOut)
+
+// Listing API's
+router.post('/api/createList', auth, createList)
 
 module.exports = router;
