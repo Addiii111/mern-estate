@@ -8,6 +8,7 @@ const auth = require('../middlewares/auth.js');
 const deleteUser = require('../controllers/deleteUser.js');
 const signOut = require('../controllers/signOut.js');
 const createList = require('../controllers/createList.js');
+const getUserListing = require('../controllers/getUserListing.js');
 
 const router = new express.Router();
 
@@ -24,5 +25,6 @@ router.delete('/api/deleteUser/:id', auth, deleteUser)
 
 // Listing API's
 router.post('/api/createList', auth, createList)
+router.get('/api/listings/:id',auth,getUserListing)
 
 module.exports = router;
