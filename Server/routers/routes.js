@@ -9,6 +9,7 @@ const deleteUser = require('../controllers/deleteUser.js');
 const signOut = require('../controllers/signOut.js');
 const createList = require('../controllers/createList.js');
 const getUserListing = require('../controllers/getUserListing.js');
+const deleteListing = require('../controllers/deleteListing.js');
 
 const router = new express.Router();
 
@@ -26,5 +27,6 @@ router.delete('/api/deleteUser/:id', auth, deleteUser)
 // Listing API's
 router.post('/api/createList', auth, createList)
 router.get('/api/listings/:id',auth,getUserListing)
+router.delete('/api/deleteListing/:id',auth,deleteListing)
 
 module.exports = router;
