@@ -161,7 +161,7 @@ export default function CreateListing() {
         }), config).then((res) =>{
           setLoading(false)
           // console.log(res.data._id);
-          navigate(`/listings/${res.data._id}`)
+          navigate(`/listing/${res.data._id}`)
         })
         
       } catch (error) {

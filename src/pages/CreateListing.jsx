@@ -145,7 +145,7 @@ export default function CreateListing() {
         }), config).then((res) =>{
           setLoading(false)
           // console.log(res.data._id);
-          navigate(`/listings/${res.data._id}`)
+          navigate(`/listing/${res.data._id}`)
         })
         
       } catch (error) {
@@ -329,13 +329,13 @@ export default function CreateListing() {
             {imageUploadError && imageUploadError}
           </p>
           {formData.imageUrls.length > 0 &&
-            formData.imageUrls.map((urls, index) => (
+            formData.imageUrls.map((url, index) => (
               <div
-                key={urls}
+                key={url}
                 className='flex justify-between p-3 border items-center'
               >
                 <img
-                  src={urls}
+                  src={url}
                   alt='listing image'
                   className='w-20 h-20 object-contain rounded-lg'
                 />
