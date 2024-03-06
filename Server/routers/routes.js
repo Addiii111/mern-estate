@@ -13,6 +13,7 @@ const deleteListing = require('../controllers/deleteListing.js');
 const updateListing = require('../controllers/updateListing.js');
 const getListing = require('../controllers/getListing.js');
 const getUser = require('../controllers/getUser.js');
+const getListings = require('../controllers/getListings.js');
 
 const router = new express.Router();
 
@@ -33,6 +34,7 @@ router.get('/api/listings/:id',auth,getUserListing)
 router.delete('/api/deleteListing/:id',auth,deleteListing)
 router.post('/api/updateListing/:id', auth, updateListing)
 router.get('/api/getListing/:id', getListing)
+router.get('/api/getListings', getListings)
 
 router.get('/api/:id',auth,getUser)
 
