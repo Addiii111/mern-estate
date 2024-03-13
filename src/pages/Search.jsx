@@ -19,7 +19,9 @@ export default function Search() {
 
     const [loading,setLoading] = useState(false)
     const [listings,setListings] = useState([])
-    console.log(listings);
+    const [showMore,setShowMore] = useState(false)
+
+
     useEffect(() => {
         const urlParams = new URLSearchParams(location.search)
         const searchTermFromUrl = urlParams.get('searchTerm')
@@ -50,11 +52,18 @@ export default function Search() {
 
          const fetchListings = async () =>{
             setLoading(true);
+            setShowMore(false);
             const searchQuery = urlParams.toString();
 
             try{
 
                 await axios.get(`/api/getListings?${searchQuery}`).then((res) => {
+
+                    if(res.data.length > 8){
+                        setShowMore(true);
+                    }else{
+                        setShowMore(false);
+                    }
                     setListings(res.data)
                     setLoading(false);
                 })
@@ -99,6 +108,20 @@ export default function Search() {
         urlParams.set('order',sidebardata.order)
         const searchQuery = urlParams.toString()
         navigate(`/search?${searchQuery}`)
+    }
+
+    const onShowMoreClick =async () => {
+        const numberOfListings = listings.length
+        const startIndex = numberOfListings
+        const urlParams = new URLSearchParams(location.search)
+        urlParams.set('startIndex', startIndex)
+        const searchQuery = urlParams.toString()
+        await axios.get(`/api/getListings?${searchQuery}`).then((res) => {
+            if(res.data.length < 9){
+                setShowMore(false)
+            }
+            setListings([...listings,...res.data])
+        })
     }
 
   return (
@@ -189,6 +212,12 @@ export default function Search() {
             {
                 !loading && listings && listings.map((listing) =>
                     <ListingItem key={listing._id} listing={listing}/> 
+                )
+            }
+
+            {
+                showMore && (
+                    <button className='text-green-700 hover:underline p-7 text-center w-full' onClick={onShowMoreClick}>Show More</button>
                 )
             }
         </div>
