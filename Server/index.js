@@ -19,5 +19,5 @@ app.use(cors({
 }));
 
 app.listen(3001, () => {
-    console.log('Listening on port 3001');
+    console.log('Listening On Port 3001');
 })
