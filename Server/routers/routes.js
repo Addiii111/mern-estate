@@ -18,7 +18,7 @@ const getListings = require('../controllers/getListings.js');
 const router = new express.Router();
 
 
-router.get('/test', test)
+router.get('/', test)
 router.post('/api/signup', signup)
 router.post('/api/signin', signin)
 router.post('/api/google', OAuth)
