@@ -3,6 +3,8 @@ const app = express()
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const router = require("./routers/routes.js");
+const dotenv = require("dotenv")
+dotenv.config();
 require("./db/conn.js");
 
 
@@ -12,7 +14,7 @@ app.use(cookieParser());
 app.use(router);
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: process.env.FRONTEND_URL,
     credentials: true,
 }));
 
