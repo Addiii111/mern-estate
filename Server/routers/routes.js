@@ -20,7 +20,7 @@ const router = new express.Router();
 
 router.get('/test', test)
 router.post('/api/signup', signup)
-router.post('/api/signin', signin)
+router.post('/signin', signin)
 router.post('/api/google', OAuth)
 router.get('/api/signOut', signOut)
 
