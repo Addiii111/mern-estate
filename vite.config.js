@@ -7,7 +7,7 @@ export default defineConfig({
     proxy: {
       '/api': {
         target: 'https://mern-estate-mu.vercel.app',
-        secure: true,
+        secure: false,
       }
     }
   },
