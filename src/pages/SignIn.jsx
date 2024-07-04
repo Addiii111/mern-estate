@@ -36,7 +36,7 @@ export default function SignIn() {
     }
 
     await axios
-      .post('https://mern-estate-mu.vercel.app/signin', formData, config)
+      .post('api/signin', formData, config)
       .then((res) => {
         dispatch(signInSuccess(res))
         navigate('/')
