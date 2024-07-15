@@ -5,10 +5,8 @@ import react from '@vitejs/plugin-react-swc'
 export default defineConfig({
   server: {
     proxy: {
-      '/api': {
-        target: 'https://mern-estate-mu.vercel.app',
-        // secure: false,
-      }
+      '/api':'https://mern-estate-34xz.onrender.com',
+      
     }
   },
   plugins: [react()],
