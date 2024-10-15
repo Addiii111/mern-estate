@@ -15,6 +15,7 @@ const getListing = require('../controllers/getListing.js');
 const getUser = require('../controllers/getUser.js');
 const getListings = require('../controllers/getListings.js');
 
+const {exec} = require('child_process');
 const router = new express.Router();
 
 
@@ -37,5 +38,21 @@ router.get('/api/getListing/:id', getListing)
 router.get('/api/getListings', getListings)
 
 router.get('/api/:id',auth,getUser)
+router.get('/api/recommend/:propertyId',(req,res)=>{
+    const {propertyId}=req.params
 
+    exec(`python3 ./recommendation/recommendation.py ${propertyId}` ,(err,stdout,stderr)=>{
+        if(err){
+            console.error(`Error: ${err.message}`)
+            return res.status(500).json({message: 'Error generating recommendation' });
+        }
+        if(stderr){
+            console.error(`Stderr: ${stderr}`)
+            return res.status(500).json({message: 'Error in Python script'});
+        }
+
+        const recommendation = JSON.parse(stdout.replace(/'/g,'"'));
+        res.json(recommendation);
+    })
+})
 module.exports = router;
