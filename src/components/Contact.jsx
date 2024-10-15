@@ -13,7 +13,7 @@ export default function Contact({ listing }) {
   useEffect(() => {
     const fetchLandlord = async () => {
       try {
-        await axios.get(import.meta.env.VITE_BASE_URL+`/api/${listing.userRef}`).then((res) => {
+        await axios.get(import.meta.env.VITE_BASE_URL+`/api/${listing.userRef}`,{withCredentials: true}).then((res) => {
           setLandlord(res.data)
         })
       } catch (error) {

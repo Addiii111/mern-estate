@@ -32,7 +32,7 @@ const [contact,setContact] = useState(false);
 
             try {
                 setLoading(true)
-                await axios.get(import.meta.env.VITE_BASE_URL+`/api/getListing/${params.listingId}`).then((res) =>{
+                await axios.get(import.meta.env.VITE_BASE_URL+`/api/getListing/${params.listingId}`,{withCredentials: true}).then((res) =>{
                     setListing(res.data)
                     setLoading(false)
                     setError(false)

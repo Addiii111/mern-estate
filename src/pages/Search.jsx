@@ -57,7 +57,7 @@ export default function Search() {
 
             try{
 
-                await axios.get(import.meta.env.VITE_BASE_URL+`/api/getListings?${searchQuery}`).then((res) => {
+                await axios.get(import.meta.env.VITE_BASE_URL+`/api/getListings?${searchQuery}`,{withCredentials: true}).then((res) => {
 
                     if(res.data.length > 8){
                         setShowMore(true);
@@ -116,7 +116,7 @@ export default function Search() {
         const urlParams = new URLSearchParams(location.search)
         urlParams.set('startIndex', startIndex)
         const searchQuery = urlParams.toString()
-        await axios.get(import.meta.env.VITE_BASE_URL+`/api/getListings?${searchQuery}`).then((res) => {
+        await axios.get(import.meta.env.VITE_BASE_URL+`/api/getListings?${searchQuery}`,{withCredentials: true}).then((res) => {
             if(res.data.length < 9){
                 setShowMore(false)
             }

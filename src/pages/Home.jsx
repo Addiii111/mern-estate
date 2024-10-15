@@ -16,7 +16,7 @@ export default function Home() {
   useEffect(() => { 
     const fetchOfferListings = async () =>{
       try {
-        await axios.get(import.meta.env.VITE_BASE_URL+'/api/getListings?offer=true&limit=4').then((res) =>{
+        await axios.get(import.meta.env.VITE_BASE_URL+'/api/getListings?offer=true&limit=4',{withCredentials: true}).then((res) =>{
           setOfferListings(res.data)
           fetchRentListings()
         })
@@ -27,7 +27,7 @@ export default function Home() {
 
     const fetchRentListings = async () => {
       try {
-        await axios.get(import.meta.env.VITE_BASE_URL+'/api/getListings?type=rent&limit=4').then((res) =>{
+        await axios.get(import.meta.env.VITE_BASE_URL+'/api/getListings?type=rent&limit=4',{withCredentials: true}).then((res) =>{
           setRentListings(res.data)
           fetchSaleListings()
         })
@@ -38,7 +38,7 @@ export default function Home() {
 
     const fetchSaleListings = async () => {
       try {
-        await axios.get(import.meta.env.VITE_BASE_URL+'/api/getListings?type=sale&limit=4').then((res) =>{
+        await axios.get(import.meta.env.VITE_BASE_URL+'/api/getListings?type=sale&limit=4',{withCredentials: true}).then((res) =>{
           setSaleListings(res.data)
         })
       } catch (error) {

@@ -99,7 +99,7 @@ export default function Profile() {
     try {
       dispatch(deleteUserStart())
       await axios
-        .delete(import.meta.env.VITE_BASE_URL+`/api/deleteUser/${currentUser.data._id}`)
+        .delete(import.meta.env.VITE_BASE_URL+`/api/deleteUser/${currentUser.data._id}`,{withCredentials: true})
         .then((res) => {
           dispatch(deleteUserSuccess(res))
           // console.log(res)
@@ -112,7 +112,7 @@ export default function Profile() {
   const handelSignOut = async () => {
     try {
       dispatch(signOutUserStart)
-      await axios.get(import.meta.env.VITE_BASE_URL+'/api/signOut').then((res) => {
+      await axios.get(import.meta.env.VITE_BASE_URL+'/api/signOut',{withCredentials: true}).then((res) => {
         dispatch(signOutUserSuccess(res))
       })
     } catch (error) {
@@ -123,7 +123,7 @@ export default function Profile() {
   const handelShowListings = async () => {
     try {
       setShowListingsError(false)
-      await axios.get(import.meta.env.VITE_BASE_URL+`/api/listings/${currentUser.data._id}`).then((res) => {
+      await axios.get(import.meta.env.VITE_BASE_URL+`/api/listings/${currentUser.data._id}`,{withCredentials: true}).then((res) => {
         setUserListings(res.data)
       })
     } catch (error) {
@@ -134,7 +134,7 @@ export default function Profile() {
   const handelListingDelete = async (listingId) => {
 
       try {
-        await axios.delete(import.meta.env.VITE_BASE_URL+`/api/deleteListing/${listingId}`).then((res) => {
+        await axios.delete(import.meta.env.VITE_BASE_URL+`/api/deleteListing/${listingId}`,{withCredentials: true}).then((res) => {
 
           setUserListings((prev) => prev.filter((listing) => listing._id != listingId))
 
