@@ -13,15 +13,19 @@ app.use(express.urlencoded());
 app.use(cookieParser());
 app.use(router);
 
+// Allow requests from specific origins (your production URL)
+const allowedOrigins = [process.env.FRONTEND_URL];
+
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
-    credentials: true,
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
 }));
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://mern-estate-xenon.netlify.app');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-  });
+
 app.listen(3001, () => {
     console.log('Listening On Port 3001');
 })
