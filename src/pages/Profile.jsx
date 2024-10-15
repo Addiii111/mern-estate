@@ -80,7 +80,7 @@ export default function Profile() {
 
       await axios
         .post(import.meta.env.VITE_BASE_URL+
-          `api/updateUser/${currentUser.data._id}`,
+          `/api/updateUser/${currentUser.data._id}`,
           JSON.stringify(formData),
           config
         )
@@ -99,7 +99,7 @@ export default function Profile() {
     try {
       dispatch(deleteUserStart())
       await axios
-        .delete(import.meta.env.VITE_BASE_URL+`api/deleteUser/${currentUser.data._id}`)
+        .delete(import.meta.env.VITE_BASE_URL+`/api/deleteUser/${currentUser.data._id}`)
         .then((res) => {
           dispatch(deleteUserSuccess(res))
           // console.log(res)
@@ -112,7 +112,7 @@ export default function Profile() {
   const handelSignOut = async () => {
     try {
       dispatch(signOutUserStart)
-      await axios.get(import.meta.env.VITE_BASE_URL+'api/signOut').then((res) => {
+      await axios.get(import.meta.env.VITE_BASE_URL+'/api/signOut').then((res) => {
         dispatch(signOutUserSuccess(res))
       })
     } catch (error) {

@@ -36,7 +36,7 @@ export default function SignIn() {
     }
 
     await axios
-      .post(import.meta.env.VITE_BASE_URL+'api/signin', formData, config)
+      .post(import.meta.env.VITE_BASE_URL+'/api/signin', formData, config)
       .then((res) => {
         dispatch(signInSuccess(res))
         navigate('/')

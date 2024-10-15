@@ -30,7 +30,7 @@ export default function SignUp() {
     }
 
     axios
-      .post(import.meta.env.VITE_BASE_URL+'api/signup', formData, config)
+      .post(import.meta.env.VITE_BASE_URL+'/api/signup', formData, config)
       .then((res) => {
         setLoading(false)
         setError(null)
