@@ -139,7 +139,7 @@ export default function CreateListing() {
           withCredentials: true,
         }
 
-        await axios.post('/api/createList' ,JSON.stringify({
+        await axios.post(import.meta.env.VITE_BASE_URL+'/api/createList' ,JSON.stringify({
           ...formData,
           userRef: currentUser.data._id
         }), config).then((res) =>{

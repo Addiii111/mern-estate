@@ -41,7 +41,7 @@ export default function CreateListing() {
 
         const fetchListing = async () => {
             const listingId = params.listingId
-            await axios.get(`/api/getListing/${listingId}`).then((res) => {
+            await axios.get(import.meta.env.VITE_BASE_URL+`/api/getListing/${listingId}`).then((res) => {
                 setFormData(res.data)
               }).catch((err) => {
                 console.log(err);
@@ -155,7 +155,7 @@ export default function CreateListing() {
           withCredentials: true,
         }
 
-        await axios.post(`/api/updateListing/${params.listingId}` ,JSON.stringify({
+        await axios.post(import.meta.env.VITE_BASE_URL+`/api/updateListing/${params.listingId}` ,JSON.stringify({
           ...formData,
           userRef: currentUser.data._id
         }), config).then((res) =>{

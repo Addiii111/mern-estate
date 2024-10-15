@@ -28,7 +28,7 @@ export default function OAuth() {
         },
         withCredentials: true,
       }
-      const res = await axios.post('/api/google', data, config)
+      const res = await axios.post(import.meta.env.VITE_BASE_URL+'/api/google', data, config)
         // const resData = await res.json()
       console.log(res)
       dispatch(signInSuccess(res))
